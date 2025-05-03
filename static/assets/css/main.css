@@ -1,5 +1,5 @@
 /**
-* Template Name: Medilab
+
 * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
 * Updated: Aug 07 2024 with Bootstrap v5.3.3
 * Author: BootstrapMade.com
@@ -64,6 +64,8 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+
+
 }
 
 a {
@@ -344,7 +346,7 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Desktop Navigation */
-@media (min-width: 1200px) {
+/*@media (min-width: 1200px) {
   .navmenu {
     padding: 0;
   }
@@ -474,133 +476,195 @@ h6 {
     left: -100%;
     visibility: visible;
   }
+}*/
+:root {
+  /* Colors */
+  --nav-color: #fff;
+  --nav-hover-color: #FFD700;
+  --nav-font: 'Poppins', sans-serif;
+  --nav-dropdown-background-color: #fff;
+  --nav-dropdown-color: #333;
+  --nav-dropdown-hover-color: #FFD700;
+
+  /* Mobile-specific */
+  --nav-mobile-background-color: #fff;
+  --accent-color: #1c5d67;         /* your “sunset” hex */
+  --contrast-color: #fff;          /* for icons on accent bg */
+  --default-color: #000;
 }
 
-/* Mobile Navigation */
-@media (max-width: 1199px) {
-  .mobile-nav-toggle {
-    color: var(--nav-color);
-    font-size: 28px;
-    line-height: 0;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
+/* ─── Desktop & Tablet (≥1200px) ─────────────────────────────────────────── */
 
+@media (min-width: 1200px) {
   .navmenu {
-    padding: 0;
-    z-index: 9997;
+    display: block !important;
+    background: transparent;
   }
-
   .navmenu ul {
-    display: none;
+    display: flex;
+    align-items: center;
+    margin: 0; padding: 0;
     list-style: none;
-    position: absolute;
-    inset: 60px 20px 20px 20px;
-    padding: 10px 0;
-    margin: 0;
-    border-radius: 6px;
-    background-color: var(--nav-mobile-background-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-    box-shadow: none;
-    overflow-y: auto;
-    transition: 0.3s;
-    z-index: 9998;
   }
-
+  .navmenu > ul > li {
+    position: relative;
+    padding: 10px 14px;
+  }
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-dropdown-color);
-    padding: 10px 20px;
-    font-family: var(--nav-font);
-    font-size: 17px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    white-space: nowrap;
-    transition: 0.3s;
+    color: var(--nav-color);
+    font: 500 15px/1 var(--nav-font);
+    text-decoration: none;
+    position: relative;
+    transition: color .3s;
   }
-
-  .navmenu a i,
-  .navmenu a:focus i {
-    font-size: 12px;
-    line-height: 0;
-    margin-left: 5px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: 0.3s;
-    background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+  .navmenu a::before {
+    content: "";
+    position: absolute;
+    bottom: -4px; left: 0;
+    height: 2px; width: 0;
+    background: var(--nav-hover-color);
+    transition: width .3s;
   }
-
-  .navmenu a i:hover,
-  .navmenu a:focus i:hover {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-  }
-
   .navmenu a:hover,
-  .navmenu .active,
-  .navmenu .active:focus {
+  .navmenu .active {
+    color: var(--nav-hover-color);
+  }
+  .navmenu a:hover::before,
+  .navmenu .active::before {
+    width: 100%;
+  }
+
+  /* Dropdown */
+  .navmenu .dropdown > a::after {
+    content: " ▼"; font-size: .6em;
+  }
+  .navmenu .dropdown ul {
+    position: absolute;
+    top: 100%; left: 0;
+    margin: 0; padding: 8px 0;
+    background: var(--nav-dropdown-background-color);
+    visibility: hidden; opacity: 0;
+    transform: translateY(10px);
+    transition: .3s;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+    z-index: 99;
+  }
+  .navmenu .dropdown:hover > ul {
+    visibility: visible; opacity: 1;
+    transform: translateY(0);
+  }
+  .navmenu .dropdown ul li {
+    min-width: 160px;
+  }
+  .navmenu .dropdown ul a {
+    display: block;
+    padding: 8px 16px;
+    color: var(--nav-dropdown-color);
+    transition: color .3s;
+  }
+  .navmenu .dropdown ul a:hover {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .active i,
-  .navmenu .active:focus i {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-    transform: rotate(180deg);
+  /* CTA Buttons */
+  .cta-btn {
+    background: var(--nav-hover-color);
+    color: var(--default-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 12px;
+    transition: background .3s;
   }
-
-  .navmenu .dropdown ul {
-    position: static;
-    display: none;
-    z-index: 99;
-    padding: 10px 0;
-    margin: 10px 20px;
-    background-color: var(--nav-dropdown-background-color);
-    transition: all 0.5s ease-in-out;
-  }
-
-  .navmenu .dropdown ul ul {
-    background-color: rgba(33, 37, 41, 0.1);
-  }
-
-  .navmenu .dropdown>.dropdown-active {
-    display: block;
-    background-color: rgba(33, 37, 41, 0.03);
-  }
-
-  .mobile-nav-active {
-    overflow: hidden;
-  }
-
-  .mobile-nav-active .mobile-nav-toggle {
-    color: #fff;
-    position: absolute;
-    font-size: 32px;
-    top: 15px;
-    right: 15px;
-    margin-right: 0;
-    z-index: 9999;
-  }
-
-  .mobile-nav-active .navmenu {
-    position: fixed;
-    overflow: hidden;
-    inset: 0;
-    background: rgba(33, 37, 41, 0.8);
-    transition: 0.3s;
-  }
-
-  .mobile-nav-active .navmenu>ul {
-    display: block;
+  .cta-btn:hover {
+    background: #e6c200;
   }
 }
+
+/* ─── Mobile (<1200px) ───────────────────────────────────────────────────── */
+
+@media (max-width: 1199.98px) {
+  .mobile-nav-toggle {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--nav-color);
+    cursor: pointer;
+    z-index: 10001;
+  }
+
+  .navmenu {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: 10000;
+  }
+  .mobile-nav-active .navmenu {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .navmenu ul {
+    list-style: none;
+    margin: 60px 20px 20px;
+    padding: 10px 0;
+    background: var(--nav-mobile-background-color);
+    border-radius: 6px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+  }
+  .mobile-nav-active .navmenu ul {
+    display: flex;
+  }
+  .navmenu > ul > li {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .navmenu a,
+  .navmenu a:focus {
+    padding: 12px 20px;
+    font: 500 17px/1 var(--nav-font);
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color .3s;
+  }
+  .navmenu a:hover,
+  .navmenu .active {
+    color: var(--nav-hover-color);
+  }
+  .navmenu .dropdown > a::after {
+    content: " ▼"; font-size: .6em;
+    float: right;
+  }
+  .navmenu .dropdown ul {
+    display: none;
+    padding-left: 10px;
+    background: rgba(0,0,0,0.03);
+  }
+  .navmenu .dropdown.dropdown-active > ul {
+    display: block;
+  }
+  .navmenu .dropdown ul a {
+    padding: 8px 20px;
+  }
+
+  /* CTA Buttons in Mobile Menu */
+  .navmenu .cta-btn {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    margin: 8px 16px;
+    text-align: center;
+  }
+  .navmenu .cta-btn:hover {
+    background: darken(var(--accent-color), 10%);
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Global Footer

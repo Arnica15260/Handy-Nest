@@ -2,8 +2,23 @@
 
 {% block content %}
 
-<h1>Dashboard : {{ request.user.username }}</h1>
-<a href="{% url 'logout' %}" class="btn btn-dark">Logout</a>
+<section class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background: linear-gradient(to right, #1c5d67, #f5f5f5);">
+  <div class="card text-center shadow-lg p-5" style="max-width: 600px; width: 100%; border-radius: 20px; background-color: #ffffff;">
 
+    <h1 class="mb-3" style="color: #1c5d67; font-weight: bold;">Welcome, {{ request.user.username }} 👋</h1>
+    <p class="text-muted mb-4">You're logged in to <strong>Handy Nest</strong>. Let's get things done!</p>
+
+     <div class="d-flex justify-content-center gap-4">
+  <a href="{% url 'home' %}" class="btn btn-primary px-4 py-2 shadow-sm me-3" style="background-color: #1c5d67; border: none;">
+    Visit our page
+  </a>
+
+  <a href="{% url 'logout' %}" class="btn btn-outline-danger px-4 py-2">
+    Logout
+  </a>
+</div>
+
+    </div>
+</section>
 
 {% endblock %}
