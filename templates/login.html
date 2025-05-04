@@ -1,92 +1,157 @@
 {% extends 'layouts/app.html' %}
-
 {% block content %}
 
-<!--<div class="row justify-content-center">
-    <div class="col-sm-6">
-        <h2 class="text-muted">Login</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - HandyNest</title>
 
-         {% if form.non_field_errors %}
-             <small class="text-danger">
-             {{ form.non_field_errors.as_ul }}
-             </small>
-         {% endif %}
+  <!-- Bootstrap & Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap');
 
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #001f3f, #0074d9);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
+    .login-shell {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 40px;
+      padding: 50px 30px;
+      width: 95%;
+      max-width: 460px;
+      box-shadow: 0 0 25px #00c6ff, 0 0 40px #0074d9;
+      backdrop-filter: blur(20px);
+      border: 2px solid #00d4ff;
+      position: relative;
+    }
 
-             <div class="form-group">
-                <label for="{{ form.username.id_for_label}}">Username:</label>
-                <input type = "text" name="{{ form.username.name }}" class="form-control" value="{{ form.username.value}}" />
-                {% if form.username.errors %}
-                <span class="text-danger">{{ form.username.errors }}</span>
-                {% endif %}
-            </div>
+    .login-shell h2 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.8rem;
+      color: #ffffff;
+      margin-bottom: 30px;
+    }
 
+    .input-box {
+      position: relative;
+      margin-bottom: 25px;
+    }
 
+    .input-box input {
+      width: 100%;
+      padding: 12px 45px;
+      border-radius: 10px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 0.95rem;
+    }
 
+    .input-box input::placeholder {
+      color: #c2dfff;
+      font-style: italic;
+    }
 
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #6cc5ff;
+    }
 
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      border-radius: 25px;
+      background-color: #00bfff;
+      border: none;
+      color: #001f3f;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: 0.3s ease;
+    }
 
-            <div class="form-group">
-                <label for="{{ form.password.id_for_label}}">Password:</label>
-                <input type= "password" name="{{ form.password.name }}" class="form-control" value="{{ form.password.value}}" />
-                <span class="text-danger">{{ form.password.errors }}</span>
-            </div>
+    .btn-login:hover {
+      background-color: #00a2e8;
+    }
 
+    .alt-link {
+      text-align: center;
+      margin-top: 15px;
+      color: #dbefff;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
 
-            <button type="submit" class="btn btn-dark">Login</button>
+    .alt-link a {
+      color: #ffdb58;
+      text-decoration: none;
+    }
 
-            <a href="{% url 'register' %}" class="btn btn-default"> Create New Account</a>
+    .alt-link a:hover {
+      text-decoration: underline;
+    }
 
+    .alert {
+      font-size: 0.9rem;
+      background-color: rgba(255, 0, 0, 0.1);
+      color: #ff9999;
+      border-left: 4px solid red;
+      padding: 8px 12px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
 
-        </form>
+<body>
+
+<div class="login-shell">
+  <h2>Log In</h2>
+
+  {% if error %}
+    <div class="alert" role="alert">
+      {{ error }}
     </div>
-</div>-->
+  {% endif %}
 
-<section class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background: linear-gradient(to right, #1c5d67, #183f4a);">
-  <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 15px;">
-    <h3 class="text-center mb-4" style="color: #1c5d67;">Welcome Back!</h3>
+  <form method="post">
+    {% csrf_token %}
 
-    {% if form.non_field_errors %}
-      <div class="alert alert-danger py-2">
-        {{ form.non_field_errors.as_ul }}
-      </div>
-    {% endif %}
+    <div class="input-box">
+      <i class="fas fa-user input-icon"></i>
+      <input type="text" name="username" id="username" placeholder="Username" required>
+    </div>
 
-    <form method="POST" action="{% url 'login' %}">
-      {% csrf_token %}
+    <div class="input-box">
+      <i class="fas fa-lock input-icon"></i>
+      <input type="password" name="password" id="password" placeholder="Password" required>
+    </div>
 
-      <!-- Username Field -->
-      <div class="mb-3">
-        <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
-        <input type="text" name="{{ form.username.name }}" class="form-control" value="{{ form.username.value }}" placeholder="Enter your username">
-        {% if form.username.errors %}
-          <small class="text-danger">{{ form.username.errors }}</small>
-        {% endif %}
-      </div>
+    <button type="submit" class="btn-login">Log In</button>
 
-      <!-- Password Field -->
-      <div class="mb-3">
-        <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
-        <input type="password" name="{{ form.password.name }}" class="form-control" value="{{ form.password.value }}" placeholder="Enter your password">
-        {% if form.password.errors %}
-          <small class="text-danger">{{ form.password.errors }}</small>
-        {% endif %}
-      </div>
+    <p class="alt-link mt-3">
+      Don’t have an account? <a href="{% url 'signup' %}">Sign up here</a>
+    </p>
+  </form>
+</div>
 
-      <!-- Submit Button -->
-      <div class="d-grid gap-2">
-        <button type="submit" class="btn" style="background-color: #1c5d67; color: #fff;">Login</button>
-        <a href="{% url 'register' %}" class="btn btn-outline-secondary">Create New Account</a>
-      </div>
-    </form>
-  </div>
-
-
-
-
+</body>
+</html>
 
 {% endblock %}
