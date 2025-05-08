@@ -187,86 +187,128 @@
   </header>
 
   <main class="main">
+<style>
+  .teal-theme-card {
+    background-color: #e6f6f7;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-left: 5px solid #0f969c;
+  }
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
+  .teal-theme-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(15, 150, 156, 0.4);
+  }
 
-<img src="{% static 'assets/img/home-bg.jpg' %}" alt="" data-aos="fade-in">
+  .teal-theme-card h5 {
+    color: #B8743E; /* Darker bronze heading */
+  }
 
-      <div class="container position-relative">
+  .teal-theme-card p {
+    color: #444;
+  }
 
-        <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
-<h2>
-  <span style="font-size: 35px; font-weight: normal;">WELCOME TO</span>
-  <span style="font-size: 50px; font-family: 'Playfair Display', serif; color: #2c3e50; margin-left: 8px;">Handy Nest</span>
-</h2>
-          <p>Connecting you to qualified Teachers, caring Nurses, and passionate Volunteers</p>
-        </div><!-- End Welcome -->
+  .teal-btn {
+    background-color: #B8743E; /* Darker bronze button */
+    color: #fff;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 16px;
+    transition: background-color 0.3s ease-in-out;
+  }
 
-        <div class="content row gy-4">
-          <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
-              <h3>Why Choose Handy Nest? </h3>
-              <p>
-                we offer expert teachers, compassionate nurses, and committed volunteers who are dedicated to improving lives. Whether you need educational assistance, healthcare support, or community help, we provide reliable service with a personal touch. Choose us for quality care and genuine support that truly makes a difference.
-              </p>
-              <div class="text-center">
-                <a href="#about" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
-              </div>
-            </div>
-          </div><!-- End Why Box -->
-
-          <div class="col-lg-8 d-flex align-items-stretch">
-            <div class="d-flex flex-column justify-content-center">
-              <div class="row gy-4">
-
-<!--                <div class="col-xl-4 d-flex align-items-stretch">-->
-<!--                  <div class="icon-box" data-aos="zoom-out" data-aos-delay="300">-->
-<!--                    <i class="bi bi-clipboard-data"></i>-->
-<!--                    <h4>Corporis voluptates officia eiusmod</h4>-->
-<!--                    <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>-->
-<!--                  </div>-->
-<!--                </div>&lt;!&ndash; End Icon Box &ndash;&gt;-->
-
-                <div class="col-xl-4 d-flex align-items-stretch">
-                <div class="icon-box" data-aos="zoom-out" data-aos-delay="300">
-                  <img src="{% static 'assets/img/t.jpg' %}" alt="Descriptive Alt Text" class="img-fluid">
-               </div>
-                  </div><!-- End Icon Box -->
-
-
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box" data-aos="zoom-out" data-aos-delay="400">
-                    <i class="bi bi-gem"></i>
-                   <!-- <h4>Ullamco laboris ladore pan</h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>-->
-                  </div>
-                </div><!-- End Icon Box -->
-
-<!--                 <div class="col-xl-4 d-flex align-items-stretch">-->
-<!--                <div class="icon-box" data-aos="zoom-out" data-aos-delay="400">-->
-<!--                  <img src="{% static 'assets/img/teacher.jpg' %}" alt="Descriptive Alt Text" class="img-fluid">-->
-<!--               </div>-->
-<!--                  </div>&lt;!&ndash; End Icon Box &ndash;&gt;-->
-
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box" data-aos="zoom-out" data-aos-delay="500">
-                    <i class="bi bi-inboxes"></i>
-                    <!--<h4>Labore consequatur incidid dolore</h4>
-                    <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>-->
-                  </div>
-                </div><!-- End Icon Box -->
+  .teal-btn:hover {
+    background-color: #965b2f; /* Even deeper bronze on hover */
+  }
+</style>
 
 
 
+<!-- Hero Section -->
+<section id="hero" class="hero section light-background">
+
+  <!-- Background Image -->
+  <img src="{% static 'assets/img/home-bg.jpg' %}" alt="" class="img-fluid" data-aos="fade-in" data-aos-duration="1500">
+
+  <div class="container position-relative">
+
+    <!-- Welcome Text -->
+    <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
+      <h2>
+        <span style="font-size: 35px; font-weight: normal;">WELCOME TO</span>
+        <span style="font-size: 50px; font-family: 'Playfair Display', serif; color: #2c3e50; margin-left: 8px;">Handy Nest</span>
+      </h2>
+      <p>Connecting you to qualified Teachers, caring Nurses, and passionate Volunteers</p>
+    </div>
+
+    <!-- Why Choose Box -->
+    <div class="content row gy-4">
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
+          <h3>Why Choose Handy Nest?</h3>
+          <p>
+            We offer expert teachers, compassionate nurses, and committed volunteers who are dedicated to improving lives. Whether you need educational assistance, healthcare support, or community help, we provide reliable service with a personal touch. Choose us for quality care and genuine support that truly makes a difference.
+          </p>
+          <div class="text-center">
+            <a href="#about" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards Section -->
+      <div class="col-lg-8 d-flex align-items-stretch">
+        <div class="row g-4">
+
+          <!-- Teacher Card -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card teal-theme-card border-0 shadow-sm p-3 rounded-4">
+              <div class="card-img-top" style="background-image: url('{% static 'assets/img/t.jpg' %}'); height: 120px; background-position: center; background-size: cover;"></div>
+              <div class="card-body text-center p-3">
+                <h5 class="fw-bold" style="font-size: 18px;">Trusted Teachers</h5>
+                <p class="mb-0">Learn from experienced educators who inspire and empower.</p>
+                <div class="mt-3">
+                  <a href="#" class="btn teal-btn btn-sm">Explore</a>
+                </div>
               </div>
             </div>
           </div>
-        </div><!-- End  Content-->
 
-      </div>
+          <!-- Nurse Card -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="card teal-theme-card border-0 shadow-sm p-3 rounded-4">
+              <div class="card-img-top" style="background-image: url('{% static 'assets/img/n.jpg' %}'); height: 120px; background-position: center; background-size: cover;"></div>
+              <div class="card-body text-center p-3">
+                <h5 class="fw-bold" style="font-size: 18px;">Compassionate Nurses</h5>
+                <p class="mb-0">Professional care delivered at home with empathy and respect.</p>
+                <div class="mt-3">
+                  <a href="#" class="btn teal-btn btn-sm">Explore</a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    </section><!-- /Hero Section -->
+          <!-- Volunteer Card -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="card teal-theme-card border-0 shadow-sm p-3 rounded-4">
+              <div class="card-img-top" style="background-image: url('{% static 'assets/img/v.jpg'%}'); height: 120px; background-position: center; background-size: cover;"></div>
+              <div class="card-body text-center p-3">
+                <h5 class="fw-bold" style="font-size: 18px;">Passionate Volunteers</h5>
+                <p class="mb-0">People who care deeply and work selflessly to uplift others.</p>
+                <div class="mt-3">
+                  <a href="#" class="btn teal-btn btn-sm">Explore</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- End Cards Section -->
+
+    </div><!-- End Content -->
+
+  </div>
+
+</section><!-- /Hero Section -->
 
     <!-- About Section -->
     <!--<section id="about" class="about section">
@@ -1210,6 +1252,7 @@
 <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
 <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
 <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
 
 <!-- Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>
