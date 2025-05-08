@@ -17,11 +17,12 @@ urlpatterns = [
     path('provider_volunteering_posts/', views.provider_volunteering_posts, name='provider_volunteering_posts'),
     path('provider_my_accepted_posts/', views.my_accepted_posts, name='provider_my_accepted_posts'),
     path('customer_dashboard_my_requests/', views.customer_my_requests, name='customer_my_requests'),
-
-
-
-
-
-
-
+    path('teaching-post_update/<int:pk>/', views.update_teaching_post, name='update_teaching_post'),
+    path('teaching-post_delete/<int:pk>/', views.delete_teaching_post, name='delete_teaching_post'),
+    path('nursing-post_update/<int:pk>', views.update_nursing_post, name='update_nursing_post'),
+    path('nursing-post_delete/<int:pk>/', views.delete_nursing_post, name='delete_nursing_post'),
+    path('volunteering-post_update/<int:pk>/', views.update_volunteering_post, name='update_volunteering_post'),
+    path('volunteering-post_delete/<int:pk>/', views.delete_volunteering_post, name='delete_volunteering_post'),
 ]
+
+

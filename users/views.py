@@ -4,7 +4,7 @@ from .models import *
 from .forms import RegisterForm, TeachingRequestForm
 from .models import TeachingRequest, NursingService, VolunteeringService
 from .forms import TeachingRequest, NursingServiceForm, VolunteeringServiceForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 
@@ -194,9 +194,63 @@ def customer_my_requests(request):
         'volunteering_posts': volunteering_posts
     })
 
+#update & delete of teaching post
+def update_teaching_post(request, pk):
+    post = get_object_or_404( TeachingRequest, pk=pk, customer=request.user)
+    if request.method == "POST":
+        form = TeachingRequestForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('customer_my_requests')
+    else:
+        form = TeachingRequestForm(instance=post)
+    return render(request, 'update.html', {'form': form, 'post': post})
+
+def delete_teaching_post(request, pk):
+    post = get_object_or_404(TeachingRequest, pk=pk, customer=request.user)
+    if request.method == "POST":
+        post.delete()
+        return redirect('customer_my_requests')
+    return render(request, 'delete.html', {'post': post})
 
 
+# update & delete for nursing post
+def update_nursing_post(request, pk):
+    post = get_object_or_404( NursingService, pk=pk, customer=request.user)
+    if request.method == "POST":
+        form = NursingServiceForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('customer_my_requests')
+    else:
+        form = NursingServiceForm(instance=post)
+    return render(request, 'update.html', {'form': form, 'post': post})
 
+def delete_nursing_post(request, pk):
+    post = get_object_or_404(NursingService, pk=pk, customer=request.user)
+    if request.method == "POST":
+        post.delete()
+        return redirect('customer_my_requests')
+    return render(request, 'delete.html', {'post': post})
+
+# update & delete for volunteering post
+def update_volunteering_post(request, pk):
+    post = get_object_or_404( VolunteeringService, pk=pk, customer=request.user)
+    if request.method == "POST":
+        form = VolunteeringServiceForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('customer_my_requests')
+    else:
+        form = VolunteeringServiceForm(instance=post)
+    return render(request, 'update.html', {'form': form, 'post': post})
+
+def delete_volunteering_post(request, pk):
+    post = get_object_or_404(VolunteeringService, pk=pk, customer=request.user)
+    if request.method == "POST":
+        post.delete()
+        return redirect('customer_my_requests')
+    return render(request, 'delete.html', {'post': post})
 
 
 

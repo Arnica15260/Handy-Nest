@@ -5,7 +5,7 @@
     <title>My Service Requests</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
@@ -44,23 +44,20 @@
             margin-bottom: 10px;
         }
 
-        .status {
+        .status-pill {
+            display: inline-block;
+            padding: 6px 14px;
+            background: linear-gradient(to right, #00bfff, #00ffff);
+            color: #000;
+            border-radius: 20px;
             font-weight: bold;
-            color: #00ffff;
+            box-shadow: 0 0 10px #00e0ff;
         }
 
-        .paid {
-            font-weight: bold;
-            color: #a5ffcc;
-        }
-
-        .contact-info {
-            background-color: #1f3e33;
-            border-left: 5px solid #00ff99;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 10px;
-            color: #ccffcc;
+        .status-accepted {
+            background: linear-gradient(to right, #00ff99, #00e68a);
+            color: #000;
+            box-shadow: 0 0 10px #00ff99;
         }
 
         .btn-outline-info {
@@ -78,20 +75,19 @@
             box-shadow: 0 0 10px #00e0ff;
         }
 
-        .label {
-            color: #9fd3ff;
+        .btn-sm {
+            font-weight: 600;
         }
 
-        a {
-            color: #66ffff;
-            text-decoration: underline;
+        .label {
+            color: #9fd3ff;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Top nav -->
+    <!-- Navigation -->
     <div class="d-flex justify-content-end mb-4">
         <a href="{% url 'dashboard' %}" class="btn btn-outline-info">
             <i class="fas fa-arrow-left"></i> Back to Dashboard
@@ -100,74 +96,107 @@
 
     <h1><i class="fas fa-envelope-open-text"></i> My Service Requests</h1>
 
-    <!-- Teaching -->
+    <!-- Teaching Requests -->
     <h2><i class="fas fa-chalkboard-teacher"></i> Teaching Requests</h2>
     {% for post in teaching_posts %}
-        <div class="glow-box">
-            <p><strong>Title:</strong> {{ post.title }}</p>
-            <p><strong>Subject:</strong> {{ post.subject }}</p>
-            <div class="desc-box">{{ post.description }}</div>
-            <p><span class="label">Location:</span> {{ post.location }}</p>
-            <p class="status">Status: {{ post.status }}</p>
-            <p class="paid">Paid: {{ post.is_paid|yesno:"Yes,No" }}</p>
-
-            {% if post.status == "Accepted" and post.accepted_by %}
-            <div class="contact-info">
-                ✅ Your request has been accepted.<br>
-                Please contact <strong>{{ post.accepted_by.get_full_name|default:post.accepted_by.username }}</strong> at:
-                <br>Email: <a href="mailto:{{ post.accepted_by.email }}">{{ post.accepted_by.email }}</a>
-                <br>Phone: {{ post.accepted_by.phone_number }}
-            </div>
+    <div class="glow-box">
+        <p><strong>Title:</strong> {{ post.title }}</p>
+        <p><strong>Subject:</strong> {{ post.subject }}</p>
+        <div class="desc-box">{{ post.description }}</div>
+        <p><span class="label">Location:</span> {{ post.location }}</p>
+        <p><span class="label">Paid Status:</span>
+            {% if post.is_paid %}
+                <span class="status-pill status-accepted">Paid</span>
+            {% else %}
+                <span class="status-pill">Unpaid</span>
             {% endif %}
+        </p>
+        <p><span class="label">Status:</span>
+            {% if post.status == "Pending" %}
+                <span class="status-pill">Pending</span>
+            {% else %}
+                <span class="status-pill status-accepted">Accepted</span>
+            {% endif %}
+        </p>
+        <div class="mt-3 d-flex gap-2">
+            <a href="{% url 'update_teaching_post' post.id %}" class="btn btn-warning btn-sm">
+                <i class="fas fa-edit"></i> Update
+            </a>
+            <a href="{% url 'delete_teaching_post' post.id %}" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i> Delete
+            </a>
         </div>
+    </div>
     {% empty %}
-        <p>No teaching requests submitted.</p>
+    <p>No teaching requests submitted.</p>
     {% endfor %}
 
-    <!-- Nursing -->
+    <!-- Nursing Requests -->
     <h2><i class="fas fa-user-nurse"></i> Nursing Requests</h2>
     {% for post in nursing_posts %}
-        <div class="glow-box">
-            <p><strong>Title:</strong> {{ post.title }}</p>
-            <div class="desc-box">{{ post.description }}</div>
-            <p><span class="label">Location:</span> {{ post.location }}</p>
-            <p class="status">Status: {{ post.status }}</p>
-            <p class="paid">Paid: {{ post.is_paid|yesno:"Yes,No" }}</p>
-
-            {% if post.status == "Accepted" and post.accepted_by %}
-            <div class="contact-info">
-                ✅ Your request has been accepted.<br>
-                Please contact <strong>{{ post.accepted_by.get_full_name|default:post.accepted_by.username }}</strong> at:
-                <br>Email: <a href="mailto:{{ post.accepted_by.email }}">{{ post.accepted_by.email }}</a>
-                <br>Phone: {{ post.accepted_by.phone_number }}
-            </div>
+    <div class="glow-box">
+        <p><strong>Title:</strong> {{ post.title }}</p>
+        <div class="desc-box">{{ post.description }}</div>
+        <p><span class="label">Location:</span> {{ post.location }}</p>
+        <p><span class="label">Paid Status:</span>
+            {% if post.is_paid %}
+                <span class="status-pill status-accepted">Paid</span>
+            {% else %}
+                <span class="status-pill">Unpaid</span>
             {% endif %}
+        </p>
+        <p><span class="label">Status:</span>
+            {% if post.status == "Pending" %}
+                <span class="status-pill">Pending</span>
+            {% else %}
+                <span class="status-pill status-accepted">Accepted</span>
+            {% endif %}
+        </p>
+        <div class="mt-3 d-flex gap-2">
+            <a href="{% url 'update_nursing_post' post.id %}" class="btn btn-warning btn-sm">
+                <i class="fas fa-edit"></i> Update
+            </a>
+            <a href="{% url 'delete_nursing_post' post.id %}" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i> Delete
+            </a>
         </div>
+    </div>
     {% empty %}
-        <p>No nursing requests submitted.</p>
+    <p>No nursing requests submitted.</p>
     {% endfor %}
 
-    <!-- Volunteering -->
+    <!-- Volunteering Requests -->
     <h2><i class="fas fa-hands-helping"></i> Volunteering Requests</h2>
     {% for post in volunteering_posts %}
-        <div class="glow-box">
-            <p><strong>Title:</strong> {{ post.title }}</p>
-            <div class="desc-box">{{ post.activity }}</div>
-            <p><span class="label">Location:</span> {{ post.location }}</p>
-            <p class="status">Status: {{ post.status }}</p>
-            <p class="paid">Paid: {{ post.is_paid|yesno:"Yes,No" }}</p>
-
-            {% if post.status == "Accepted" and post.accepted_by %}
-            <div class="contact-info">
-                ✅ Your request has been accepted.<br>
-                Please contact <strong>{{ post.accepted_by.get_full_name|default:post.accepted_by.username }}</strong> at:
-                <br>Email: <a href="mailto:{{ post.accepted_by.email }}">{{ post.accepted_by.email }}</a>
-                <br>Phone: {{ post.accepted_by.phone_number }}
-            </div>
+    <div class="glow-box">
+        <p><strong>Title:</strong> {{ post.title }}</p>
+        <div class="desc-box">{{ post.activity }}</div>
+        <p><span class="label">Location:</span> {{ post.location }}</p>
+        <p><span class="label">Paid Status:</span>
+            {% if post.is_paid %}
+                <span class="status-pill status-accepted">Paid</span>
+            {% else %}
+                <span class="status-pill">Unpaid</span>
             {% endif %}
+        </p>
+        <p><span class="label">Status:</span>
+            {% if post.status == "Pending" %}
+                <span class="status-pill">Pending</span>
+            {% else %}
+                <span class="status-pill status-accepted">Accepted</span>
+            {% endif %}
+        </p>
+        <div class="mt-3 d-flex gap-2">
+            <a href="{% url 'update_volunteering_post' post.id %}" class="btn btn-warning btn-sm">
+                <i class="fas fa-edit"></i> Update
+            </a>
+            <a href="{% url 'delete_volunteering_post' post.id %}" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i> Delete
+            </a>
         </div>
+    </div>
     {% empty %}
-        <p>No volunteering requests submitted.</p>
+    <p>No volunteering requests submitted.</p>
     {% endfor %}
 </div>
 
