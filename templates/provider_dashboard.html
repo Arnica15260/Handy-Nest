@@ -1,49 +1,162 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>👩‍🏫 Provider - HandyNest</title>
+    <title>Provider Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #fff8dc;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(120deg, #0a1f44, #1b2e61);
+            color: white;
+            min-height: 100vh;
+            padding: 30px 15px;
         }
-        .navbar {
-            background: linear-gradient(45deg, #ff69b4, #ffb347);
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
-        .dashboard-card {
-            border: 3px dotted #add8e6;
-            border-radius: 20px;
-            background-color: #e6f7ff;
+
+        .topbar .navbar a {
+            color: #d4bfff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
         }
-        footer {
-            background: linear-gradient(45deg, #ffb347, #ff69b4);
+
+        .topbar .navbar a:hover {
+            color: #9f82ff;
         }
-        .nav-link, .navbar-brand {
-            font-size: 1.2rem;
+
+        .welcome {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .highlight {
+            color: #82d1ff;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-top: 20px;
+        }
+
+        .card-container {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card-link {
+            text-decoration: none;
+            flex: 1 1 280px;
+        }
+
+        .card {
+            background-color: #172849;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            color: #fff;
+            height: 100%;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #243b63;
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #82d1ff;
+        }
+
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .topbar .navbar {
+                margin-top: 10px;
+            }
+
+            .topbar .navbar a {
+                margin-left: 0;
+                margin-right: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">🌟 HandyNest</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto text-center">
-                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">🏠 Home</a></li>
-
-
-
-                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">📊 Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">🚪 Logout</a></li>
-            </ul>
-        </div>
+<div class="container">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="welcome">Welcome, <span class="highlight">{{ user.username }}</span></div>
+        <nav class="navbar">
+            <a href="{% url 'home' %}">Home</a>
+        </nav>
     </div>
-</nav>
+
+    <div class="section-title">Select a category below</div>
+
+    <!-- Clickable Cards -->
+    <div class="card-container">
+        <a href="{% url 'provider_teaching_posts' %}" class="card-link">
+            <div class="card">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h5>Teaching Posts</h5>
+                <p>Find and apply to education-related service opportunities.</p>
+            </div>
+        </a>
+
+        <a href="{% url 'provider_nursing_posts' %}" class="card-link">
+            <div class="card">
+                <i class="fas fa-user-nurse"></i>
+                <h5>Nursing Posts</h5>
+                <p>Respond to posts needing nursing or child or old care.</p>
+            </div>
+        </a>
+
+        <a href="{% url 'provider_volunteering_posts' %}" class="card-link">
+            <div class="card">
+                <i class="fas fa-hands-helping"></i>
+                <h5>Volunteering Posts</h5>
+                <p>Give back to the community with your time and expertise.</p>
+            </div>
+        </a>
+
+        <a href="{% url 'provider_my_accepted_posts' %}" class="card-link">
+            <div class="card">
+                <i class="fas fa-check-circle"></i>
+                <h5>Accepted Posts</h5>
+                <p>View the service posts you have accepted and manage them.</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

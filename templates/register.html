@@ -18,7 +18,7 @@
             padding: 0;
             font-family: 'Quicksand', sans-serif;
             height: 100vh;
-            background: linear-gradient(to right, #0a1f44, #1b2e61);
+            background: linear-gradient(to right, #004764,#057aa6);
             overflow: hidden;
         }
 
@@ -55,12 +55,12 @@
         }
 
         .form-container {
-            background: rgba(0, 0, 0, 0.6);
+            background:#04678c;
             border-radius: 15px;
             padding: 30px 25px;
             width: 100%;
             max-width: 360px;
-            color: #fff;
+            color:#04678c;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
 
@@ -80,7 +80,7 @@
         .input-group select {
             width: 100%;
             padding: 10px 40px;
-            background: #0f2c4d;
+            background: #004764;
             border: none;
             border-radius: 10px;
             color: #fff;
@@ -121,7 +121,7 @@
         }
 
         .login-link a {
-            color: #ffd700;
+            color: #fff;
             text-decoration: none;
         }
 
@@ -143,7 +143,6 @@
         <div class="form-container">
             <h2>Create your account</h2>
 
-
             <form method="post">
                 {% csrf_token %}
 
@@ -155,6 +154,11 @@
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
                     {{ form.email }}
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    {{ form.phone_number }}
                 </div>
 
                 <div class="input-group">

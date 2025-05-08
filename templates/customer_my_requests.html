@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Service Requests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #0a1f44, #1b2e61);
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            padding: 40px 15px;
+        }
+
+        h1, h2 {
+            color: #82d1ff;
+            margin-bottom: 25px;
+        }
+
+        .glow-box {
+            background-color: #0c1e3d;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px 3px rgba(0, 204, 255, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .glow-box:hover {
+            transform: scale(1.02);
+        }
+
+        .desc-box {
+            background-color: #122b52;
+            padding: 15px;
+            border-radius: 10px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            font-weight: bold;
+            color: #00ffff;
+        }
+
+        .paid {
+            font-weight: bold;
+            color: #a5ffcc;
+        }
+
+        .contact-info {
+            background-color: #1f3e33;
+            border-left: 5px solid #00ff99;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            color: #ccffcc;
+        }
+
+        .btn-outline-info {
+            border-radius: 20px;
+            font-weight: 600;
+            border: 2px solid #00e0ff;
+            color: #00e0ff;
+            background-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-info:hover {
+            background-color: #00e0ff;
+            color: #000;
+            box-shadow: 0 0 10px #00e0ff;
+        }
+
+        .label {
+            color: #9fd3ff;
+        }
+
+        a {
+            color: #66ffff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Top nav -->
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-info">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <h1><i class="fas fa-envelope-open-text"></i> My Service Requests</h1>
+
+    <!-- Teaching -->
+    <h2><i class="fas fa-chalkboard-teacher"></i> Teaching Requests</h2>
+    {% for post in teaching_posts %}
+        <div class="glow-box">
+            <p><strong>Title:</strong> {{ post.title }}</p>
+            <p><strong>Subject:</strong> {{ post.subject }}</p>
+            <div class="desc-box">{{ post.description }}</div>
+            <p><span class="label">Location:</span> {{ post.location }}</p>
+            <p class="status">Status: {{ post.status }}</p>
+            <p class="paid">Paid: {{ post.is_paid|yesno:"Yes,No" }}</p>
+
+            {% if post.status == "Accepted" and post.accepted_by %}
+            <div class="contact-info">
+                ✅ Your request has been accepted.<br>
+                Please contact <strong>{{ post.accepted_by.get_full_name|default:post.accepted_by.username }}</strong> at:
+                <br>Email: <a href="mailto:{{ post.accepted_by.email }}">{{ post.accepted_by.email }}</a>
+                <br>Phone: {{ post.accepted_by.phone_number }}
+            </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No teaching requests submitted.</p>
+    {% endfor %}
+
+    <!-- Nursing -->
+    <h2><i class="fas fa-user-nurse"></i> Nursing Requests</h2>
+    {% for post in nursing_posts %}
+        <div class="glow-box">
+            <p><strong>Title:</strong> {{ post.title }}</p>
+            <div class="desc-box">{{ post.description }}</div>
+            <p><span class="label">Location:</span> {{ post.location }}</p>
+            <p class="status">Status: {{ post.status }}</p>
+            <p class="paid">Paid: {{ post.is_paid|yesno:"Yes,No" }}</p>
+
+            {% if post.status == "Accepted" and post.accepted_by %}
+            <div class="contact-info">
+                ✅ Your request has been accepted.<br>
+                Please contact <strong>{{ post.accepted_by.get_full_name|default:post.accepted_by.username }}</strong> at:
+                <br>Email: <a href="mailto:{{ post.accepted_by.email }}">{{ post.accepted_by.email }}</a>
+                <br>Phone: {{ post.accepted_by.phone_number }}
+            </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No nursing requests submitted.</p>
+    {% endfor %}
+
+    <!-- Volunteering -->
+    <h2><i class="fas fa-hands-helping"></i> Volunteering Requests</h2>
+    {% for post in volunteering_posts %}
+        <div class="glow-box">
+            <p><strong>Title:</strong> {{ post.title }}</p>
+            <div class="desc-box">{{ post.activity }}</div>
+            <p><span class="label">Location:</span> {{ post.location }}</p>
+            <p class="status">Status: {{ post.status }}</p>
+            <p class="paid">Paid: {{ post.is_paid|yesno:"Yes,No" }}</p>
+
+            {% if post.status == "Accepted" and post.accepted_by %}
+            <div class="contact-info">
+                ✅ Your request has been accepted.<br>
+                Please contact <strong>{{ post.accepted_by.get_full_name|default:post.accepted_by.username }}</strong> at:
+                <br>Email: <a href="mailto:{{ post.accepted_by.email }}">{{ post.accepted_by.email }}</a>
+                <br>Phone: {{ post.accepted_by.phone_number }}
+            </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No volunteering requests submitted.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>

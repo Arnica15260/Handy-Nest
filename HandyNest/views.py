@@ -1,4 +1,7 @@
+
 from django.shortcuts import render
+
+
 
 
 def home(request):
@@ -18,3 +21,5 @@ def login(request):
 
 def register(request):
     return render(request, 'register.html')
+
+
