@@ -25,6 +25,7 @@ from .models import ProviderProfile
 
 
 
+
 #For login
 def login_view(request):
     if request.method == 'POST':
@@ -75,20 +76,6 @@ def dashboard_view(request):
         return render(request, 'customer_dashboard.html')
     else:
         return redirect('home')
-
-
-
-
-def dashboard(request):
-    if request.user.role == 'provider':
-        return render(request, 'provider_dashboard.html')
-    elif request.user.role == 'customer':
-        return render(request, 'customer_dashboard.html')
-
-    else:
-        return redirect('home')
-
-
 
 
 
@@ -283,6 +270,128 @@ def contact(request):
     return render(request, 'contact.html', {'form': form})
 
 
+@login_required
+def complete_teaching_post(request, pk):
+    post = get_object_or_404(TeachingRequest, pk=pk, accepted_by=request.user)
+
+    if request.method == 'POST':
+        post.status = 'Completed'
+        post.save()
+
+        profile, created = ProviderProfile.objects.get_or_create(user=request.user)
+        profile.completed_services += 1
+        profile.save()
+
+        messages.success(request, "Teaching service marked as completed.")
+        return redirect('provider_my_accepted_posts')
+
+    return render(request, 'mark_completed.html', {'post': post})
+
+@login_required
+def complete_nursing_post(request, pk):
+    post = get_object_or_404(NursingService, pk=pk, accepted_by=request.user)
+
+    if request.method == 'POST':
+        post.status = 'Completed'
+        post.save()
+
+        profile, _ = ProviderProfile.objects.get_or_create(user=request.user)
+        profile.completed_services += 1
+        profile.save()
+
+        messages.success(request, "Nursing service marked as completed.")
+        return redirect('provider_my_accepted_posts')
+
+    return render(request, 'mark_completed.html', {'post': post})
+
+
+@login_required
+def complete_volunteering_post(request, pk):
+    post = get_object_or_404(VolunteeringService, pk=pk, accepted_by=request.user)
+
+    if request.method == 'POST':
+        post.status = 'Completed'
+        post.save()
+
+        profile, _ = ProviderProfile.objects.get_or_create(user=request.user)
+        profile.completed_services += 1
+        profile.save()
+
+        messages.success(request, "Volunteering service marked as completed.")
+        return redirect('provider_my_accepted_posts')
+
+    return render(request, 'mark_completed.html', {'post': post})
+
+
+
+
+
+@login_required
+def generate_certificate(request):
+    profile = ProviderProfile.objects.get(user=request.user)
+    milestone = (profile.completed_services // 1) * 1
+
+    if milestone >= 1 and milestone > profile.last_certificate_milestone:
+        name = request.user.get_full_name() or request.user.username
+        filename = f"certificate_{request.user.username}_{milestone}.pdf"
+        cert_path = os.path.join(settings.MEDIA_ROOT, 'certificates')
+        os.makedirs(cert_path, exist_ok=True)
+        filepath = os.path.join(cert_path, filename)
+
+        buffer = BytesIO()
+        c = canvas.Canvas(buffer, pagesize=A4)
+        width, height = A4
+
+        bg_path = os.path.join(settings.BASE_DIR, 'static', 'assets', 'img', 'certificate_bg.png')
+        if os.path.exists(bg_path):
+            bg = ImageReader(bg_path)
+            c.drawImage(bg, 0, 0, width=width, height=height)
+
+
+
+
+        c.setFillColorRGB(1, 1, 1)
+
+
+        y = height - 180
+        c.setFont("Helvetica-Bold", 32)
+        c.drawCentredString(width / 2, y, "CERTIFICATE")
+
+        y -= 40
+        c.setFont("Helvetica", 18)
+        c.drawCentredString(width / 2, y, "OF EXCELLENCE")
+
+        y -= 50
+        c.setFont("Helvetica-Bold", 14)
+        c.drawCentredString(width / 2, y, "THIS CERTIFICATE IS PROUDLY PRESENTED TO")
+
+        y -= 45
+        c.setFont("Helvetica-Bold", 28)
+        c.drawCentredString(width / 2, y, name)
+
+        y -= 55
+        c.setFont("Helvetica", 14)
+        c.drawCentredString(width / 2, y, f"for successfully completing {milestone} service request{'s' if milestone > 1 else ''} on")
+        y -= 25
+        c.drawCentredString(width / 2, y, "Handy Nest. Thank you for your contribution!")
+
+
+        c.setFont("Helvetica-Oblique", 10)
+        c.drawCentredString(width / 2, 80, "Issued by Handy Nest · www.handynest.com")
+
+
+        c.showPage()
+        c.save()
+
+        with open(filepath, 'wb') as f:
+            f.write(buffer.getvalue())
+
+        profile.last_certificate_milestone = milestone
+        profile.save()
+
+        return FileResponse(open(filepath, 'rb'), as_attachment=True, filename=filename)
+
+    return redirect('provider_dashboard')
 
 
 
