@@ -24,10 +24,6 @@ urlpatterns = [
     path('volunteering-post_update/<int:pk>/', views.update_volunteering_post, name='update_volunteering_post'),
     path('volunteering-post_delete/<int:pk>/', views.delete_volunteering_post, name='delete_volunteering_post'),
     path('contact/',views.contact, name='contact'),
-    path('generate-certificate/', generate_certificate, name='generate_certificate'),
-    path('complete-teaching/<int:pk>/', views.complete_teaching_post, name='complete_teaching_post'),
-    path('complete-nursing/<int:pk>/', views.complete_nursing_post, name='complete_nursing_post'),
-    path('complete-volunteering/<int:pk>/', views.complete_volunteering_post, name='complete_volunteering_post'),
 
 ]
 

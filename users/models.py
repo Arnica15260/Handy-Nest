@@ -82,10 +82,3 @@ class ContactMessage(models.Model):
     def __str__(self):
         return self.name
 
-class ProviderProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    completed_services = models.PositiveIntegerField(default=0)
-    last_certificate_milestone = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.user.username}'s Profile"
