@@ -160,7 +160,7 @@
         <li class="nav-item"><a class="nav-link text-white px-3 fw-semibold" href="#team">Team</a></li>
         <li class="nav-item"><a class="nav-link text-white px-3 fw-semibold" href="#faq">FAQ</a></li>
         <li class="nav-item"><a class="nav-link text-white px-3 fw-semibold" href="#testimonials">Feedbacks</a></li>
-        <li><a class="nav-link text-white px-3 fw-semibold" href="{% url 'contact' %}">Contact</a></li>
+        <li><a class="nav-link text-white px-3 fw-semibold" href="#contact">Contact</a></li>
 
 
       </ul>
@@ -1003,6 +1003,40 @@
     </section>-->
     <!-- Contact Section -->
 <section id="contact" class="contact section py-5" style="background: #f3f9fb;">
+  <style>
+    .custom-card {
+      background: linear-gradient(135deg, #2f4f5a, #3a6b5e); /* Deep blue to teal */
+      border: 2px solid #d4af7f; /* Bronze border */
+      border-radius: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #ffffff;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .custom-card h4,
+    .custom-card p {
+      color: #ffffff;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .btn-connect {
+      background-color: #d4af7f; /* Bronze */
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-connect:hover {
+      background-color: #b8966d;
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+  </style>
 
   <!-- Section Title -->
   <div class="container section-title text-center mb-5" data-aos="fade-up">
@@ -1019,7 +1053,7 @@
     </iframe>
   </div>
 
-  <!-- Contact Info & Form -->
+  <!-- Contact Info & Message Card -->
   <div class="container">
     <div class="row gy-5">
 
@@ -1054,38 +1088,21 @@
         </div>
       </div>
 
-      <!-- Contact Form -->
-      <div class="col-lg-8">
-        <form action="#" method="post" class="php-email-form p-4 rounded shadow-sm bg-white" data-aos="fade-up" data-aos-delay="200">
-          <div class="row gy-3">
-            <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-            </div>
-
-            <div class="col-md-6">
-              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-            </div>
-
-            <div class="col-md-12">
-              <input type="text" name="subject" class="form-control" placeholder="Subject" required>
-            </div>
-
-            <div class="col-md-12">
-              <textarea name="message" rows="6" class="form-control" placeholder="Your Message" required></textarea>
-            </div>
-
-            <div class="col-md-12 text-center">
-              <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill mt-3">Send Message</button>
-            </div>
+      <!-- Message Card -->
+      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+        <div class="card custom-card shadow-lg border-0">
+          <div class="card-body text-center p-5">
+            <h4 class="card-title fw-bold mb-3">Feel Free to Connect</h4>
+            <p class="card-text mb-4">Have any questions or suggestions? We’re just a message away.</p>
+            <a href="{% url 'contact' %}" class="btn btn-connect px-4 py-2 rounded-pill">Send Us Message</a>
           </div>
-        </form>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
 }
-
   </main>
 <footer id="footer" class="footer py-5 text-white" style="background: linear-gradient(to right, #0a2a2a, #0f3443);">
 
