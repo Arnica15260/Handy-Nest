@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
   <meta charset="UTF-8">
   <title>Login - HandyNest</title>
 
@@ -11,7 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-  <style>
+  <!--<style>
     @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap');
 
     body {
@@ -113,6 +114,119 @@
       background-color: rgba(255, 0, 0, 0.1);
       color: #ff9999;
       border-left: 4px solid red;
+      padding: 8px 12px;
+      margin-bottom: 20px;
+    }
+  </style>-->
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap');
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+      background:
+        linear-gradient(135deg, rgba(30, 60, 71, 0.95), rgba(32, 75, 60, 0.95)),
+      url("{% static 'assets/img/logo.png' %}") no-repeat center center fixed;
+      background-size:100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .login-shell {
+      background: rgba(8, 24, 26, 0.5);
+      border-radius: 40px;
+      padding: 50px 30px;
+      width: 95%;
+      max-width: 460px;
+      box-shadow: 0 0 25px #6cc5ff, 0 0 40px #2a6972;
+      backdrop-filter: blur(20px);
+      border: 2px solid #7ecdcf;
+      position: relative;
+    }
+
+    .login-shell h2 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.8rem;
+      color: #d4af7f;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 45px;
+      border-radius: 10px;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: #eafafc;
+      font-size: 0.95rem;
+    }
+
+    .input-box input::placeholder {
+      color: #b4d5d0;
+      font-style: italic;
+    }
+
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #9dd9d2;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      border-radius: 25px;
+      background: linear-gradient(to right, #2e8b57, #1e3c47);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px rgba(47, 111, 97, 0.5);
+    }
+
+    .btn-login:hover {
+      background-color: #2e6d60;
+      transform: translateY(-2px);
+    }
+
+    .alt-link {
+      text-align: center;
+      margin-top: 15px;
+      color: #bfdcd7;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    .alt-link a {
+      color: #d4af7f;
+      text-decoration: none;
+    }
+
+    .alt-link a:hover {
+      text-decoration: underline;
+      color: #f1c37f;
+    }
+
+    .alert {
+      font-size: 0.9rem;
+      background-color: rgba(255, 80, 80, 0.08);
+      color: #ff9f9f;
+      border-left: 4px solid #ff6b6b;
       padding: 8px 12px;
       margin-bottom: 20px;
     }

@@ -4,13 +4,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Register - HandyNest</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <style>
+     <!--<style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap');
 
         body {
@@ -128,14 +129,147 @@
         .login-link a:hover {
             text-decoration: underline;
         }
-    </style>
+    </style>-->
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Quicksand', sans-serif;
+        height: 100vh;
+        background: linear-gradient(to right, #1e3c47, #204b3c); /* Deep blue to dark green */
+        overflow: hidden;
+    }
+
+    .split-screen {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .left-panel {
+    flex: 1;
+    background:
+        url("{% static 'assets/img/logo.png' %}") no-repeat center center,
+        url('https://www.transparenttextures.com/patterns/asfalt-light.png') repeat;
+    background-size:70%, auto;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 30, 40, 0.7); /* Dark ocean overlay */
+    color: #d4af7f; /* Bronze text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+    .left-panel h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px #000;
+        text-align: center;
+    }
+
+    .right-panel {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.03); /* Subtle frosted effect */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .form-container {
+        background: #0e2f35; /* Deep teal */
+        border-radius: 15px;
+        padding: 30px 25px;
+        width: 100%;
+        max-width: 360px;
+        color: #d4af7f;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .form-container h2 {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #d4af7f;
+        text-shadow: 0 1px 3px #000;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 10px 40px;
+        background: #1e3c47; /* Deep navy input */
+        border: none;
+        border-radius: 10px;
+        color: #ffffff;
+    }
+
+    .input-group input::placeholder {
+        color: #aac4e9;
+        font-style: italic;
+    }
+
+    .input-group i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #84bfcf; /* Soft ocean blue */
+    }
+
+    .btn-submit {
+        background: linear-gradient(to right, #2e8b57, #1e3c47); /* Teal to deep blue */
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        width: 100%;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        box-shadow: 0 0 12px rgba(40, 130, 110, 0.4);
+        transition: 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background: #236b5f;
+        transform: translateY(-2px);
+    }
+
+    .login-link {
+        margin-top: 15px;
+        text-align: center;
+        font-style: italic;
+        color: #bfdcd7;
+    }
+
+    .login-link a {
+        color: #d4af7f;
+        text-decoration: none;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+        color: #f1c37f;
+    }
+</style>
+
 </head>
 
 <body>
 <div class="split-screen">
     <!-- Left Panel -->
     <div class="left-panel">
-        <h1>Welcome<br>To HandyNest . . .</h1>
+        <h1><br></h1>
     </div>
 
     <!-- Right Panel -->

@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
 
-    <style>
+    <!--<style>
         body {
             background: linear-gradient(to right, #0a1f44, #1b2e61);
             color: white;
@@ -82,7 +82,85 @@
         .label {
             color: #9fd3ff;
         }
-    </style>
+    </style>-->
+    <style>
+  body {
+    background: linear-gradient(to right, #1e3c47, #204b3c); /* Deep blue to dark green */
+    color: #d4af7f; /* Bronze */
+    font-family: 'Quicksand', sans-serif;
+    padding: 40px 15px;
+  }
+
+  h1, h2 {
+    color: #7ecdcf; /* Ocean teal */
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .glow-box {
+    background-color: #0d2c33; /* Deep teal-blue */
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 15px 3px rgba(126, 205, 207, 0.3); /* Teal glow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #d4af7f; /* Bronze border */
+  }
+
+  .glow-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 22px 5px rgba(126, 205, 207, 0.45);
+  }
+
+  .desc-box {
+    background-color: #193d3b; /* Dark green/teal */
+    padding: 15px;
+    border-radius: 10px;
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #d8f7f9;
+  }
+
+  .status-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(to right, #21897e, #66bfbf); /* Teal to ocean blue */
+    color: #002f2f;
+    border-radius: 20px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(102, 191, 191, 0.5);
+  }
+
+  .status-accepted {
+    background: linear-gradient(to right, #6cd39a, #2e8b57); /* Mint green to dark green */
+    color: #001a14;
+    box-shadow: 0 0 10px #6cd39a;
+  }
+
+  .btn-outline-info {
+    border-radius: 20px;
+    font-weight: 600;
+    border: 2px solid #7ecdcf;
+    color: #7ecdcf;
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-info:hover {
+    background-color: #7ecdcf;
+    color: #003c3c;
+    box-shadow: 0 0 10px #7ecdcf;
+  }
+
+  .btn-sm {
+    font-weight: 600;
+  }
+
+  .label {
+    color: #a8d5c8; /* Muted seafoam */
+  }
+</style>
+
 </head>
 <body>
 
