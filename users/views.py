@@ -1,11 +1,14 @@
 
 from django.contrib.auth import authenticate, login, logout
 from .models import *
-from .forms import RegisterForm, TeachingRequestForm
+from .forms import RegisterForm, TeachingRequestForm, ContactForm
 from .models import TeachingRequest, NursingService, VolunteeringService
 from .forms import TeachingRequest, NursingServiceForm, VolunteeringServiceForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import ContactForm
+
 
 
 
@@ -214,6 +217,7 @@ def delete_teaching_post(request, pk):
     return render(request, 'delete.html', {'post': post})
 
 
+
 # update & delete for nursing post
 def update_nursing_post(request, pk):
     post = get_object_or_404( NursingService, pk=pk, customer=request.user)
@@ -254,9 +258,19 @@ def delete_volunteering_post(request, pk):
 
 
 
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been sent successfully!')
+            return redirect('contact')
+        else:
+            print("Form is not valid:", form.errors)
+    else:
+        form = ContactForm()
 
-
-
+    return render(request, 'contact.html', {'form': form})
 
 
 

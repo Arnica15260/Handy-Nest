@@ -23,6 +23,7 @@ urlpatterns = [
     path('nursing-post_delete/<int:pk>/', views.delete_nursing_post, name='delete_nursing_post'),
     path('volunteering-post_update/<int:pk>/', views.update_volunteering_post, name='update_volunteering_post'),
     path('volunteering-post_delete/<int:pk>/', views.delete_volunteering_post, name='delete_volunteering_post'),
+    path('contact/',views.contact, name='contact'),
 ]
 
 

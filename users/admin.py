@@ -8,4 +8,5 @@ admin.site.register(User)
 admin.site.register(TeachingRequest)
 admin.site.register(NursingService)
 admin.site.register(VolunteeringService)
+admin.site.register(ContactMessage)
 

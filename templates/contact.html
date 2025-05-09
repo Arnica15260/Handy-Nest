@@ -1,12 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>contact</title>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #0f3443, #1c5d67);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    .contact-box {
+      background-color: #035c79;
+      padding: 40px 30px;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 450px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .contact-box h2 {
+      text-align: center;
+      color: #00e0ff;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .form-group i {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #aaa;
+    }
+
+    .form-control {
+      background-color: #054c61;
+      color: #fff;
+      border: none;
+      padding-left: 45px;
+      border-radius: 15px;
+      height: 48px;
+    }
+
+    .form-control::placeholder {
+      color: #ccc;
+    }
+
+    .form-control:focus {
+      border: 1px solid #00e0ff;
+      box-shadow: none;
+    }
+
+    textarea.form-control {
+      height: 120px;
+      padding-top: 15px;
+      resize: none;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background-color: #00c3e0;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      color: black;
+      font-size: 16px;
+    }
+
+    .btn-submit:hover {
+      background-color: #00a1b8;
+    }
+
+    .alert {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
-<h1>Contact</h1>  <br>
-<a href="{% url 'home' %}">  Home</a>
+
+<div class="contact-box">
+  <h2>Contact Us</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <i class="fas fa-user"></i>
+      {{ form.name }}
+    </div>
+
+    <div class="form-group">
+      <i class="fas fa-envelope"></i>
+      {{ form.email }}
+    </div>
+
+    <div class="form-group">
+      <i class="fas fa-tag"></i>
+      {{ form.subject }}
+    </div>
+
+    <div class="form-group">
+      <i class="fas fa-comment"></i>
+      {{ form.message }}
+    </div>
+
+    <button type="submit" class="btn btn-submit">
+      <i class="fas fa-paper-plane"></i> Send Message
+    </button>
+  </form>
+</div>
 
 </body>
 </html>

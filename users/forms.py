@@ -1,7 +1,7 @@
 
 
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, ContactMessage
 from django import forms
 from .models import TeachingRequest, NursingService,  VolunteeringService
 
@@ -32,6 +32,9 @@ class VolunteeringServiceForm(forms.ModelForm):
         model = VolunteeringService
         fields = ['customer','title','activity','location','is_paid']
 
-
-
+#for contact
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'subject', 'message']
 
