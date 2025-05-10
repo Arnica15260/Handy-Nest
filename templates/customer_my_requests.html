@@ -12,7 +12,7 @@
 
     <style>
         body {
-            background: linear-gradient(to right, #0a1f44, #1b2e61);
+            background: linear-gradient(to right,#1e3c47 , #2a6972);
             color: white;
             font-family: 'Quicksand', sans-serif;
             padding: 40px 15px;
@@ -24,7 +24,7 @@
         }
 
         .glow-box {
-            background-color: #0c1e3d;
+            background-color: #0a2436 ;
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 25px;
@@ -101,7 +101,6 @@
 <body>
 
 <div class="container">
-    <!-- Navigation -->
     <div class="d-flex justify-content-end mb-4">
         <a href="{% url 'dashboard' %}" class="btn btn-outline-info">
             <i class="fas fa-arrow-left"></i> Back to Dashboard
@@ -110,7 +109,7 @@
 
     <h1><i class="fas fa-envelope-open-text"></i> My Service Requests</h1>
 
-    <!-- Teaching Requests -->
+
     <h2><i class="fas fa-chalkboard-teacher"></i> Teaching Requests</h2>
     {% for post in teaching_posts %}
     <div class="glow-box">
@@ -199,7 +198,7 @@
     <p>No nursing requests submitted.</p>
     {% endfor %}
 
-    <!-- Volunteering Requests -->
+
     <h2><i class="fas fa-hands-helping"></i> Volunteering Requests</h2>
     {% for post in volunteering_posts %}
     <div class="glow-box">
