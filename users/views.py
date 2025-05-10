@@ -125,6 +125,14 @@ def provider_dashboard(request):
     return render(request, 'provider_dashboard.html', {
         'teaching_requests': teaching_requests
     })
+def dashboard(request):
+    if request.user.role == 'provider':
+        return render(request, 'provider_dashboard.html')
+    elif request.user.role == 'customer':
+        return render(request, 'customer_dashboard.html')
+
+    else:
+        return redirect('home')
 
 @login_required
 def provider_teaching_posts(request):
@@ -261,7 +269,7 @@ def contact(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your message has been sent successfully!')
-            return redirect('contact')
+            return redirect('/')
         else:
             print("Form is not valid:", form.errors)
     else:
